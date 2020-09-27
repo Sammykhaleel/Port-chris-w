@@ -1,30 +1,30 @@
 let pokemonRepository = (function () {
     let pokemonList = [
         {
-            name: 'Charmander',
+            name: "Charmander",
             height: 2,
-            types: ['fire']
+            types: ["fire"],
         },
         {
-            name: 'Blastoise',
+            name: "Blastoise",
+            height: 7.05,
+            types: ["water"],
+        },
+        {
+            name: "Slowbro",
             height: 5.05,
-            types: ['water']
+            types: ["grass", "psychic"],
         },
         {
-            name: 'Slowbro',
-            height: 5.05,
-            types: ['water', 'psychic']
-        },
-        {
-            name: 'Alakazam',
+            name: "Alakazam",
             height: 4.11,
-            types: ['psychic']
+            types: ["psychic"],
         },
         {
-            name: 'Mew',
+            name: "Mew",
             height: 1.04,
-            types: ['psychic']
-        }
+            types: ["speed"],
+        },
     ];
 
     function add(pokemon) {
@@ -40,8 +40,47 @@ let pokemonRepository = (function () {
         getAll: getAll,
     };
 })();
-pokemonRepository.getAll();
 
-pokemonList.forEach(function (pokemon) {
-    document.write(pokemon.name + ' (height: ' + pokemon.height + ')');
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({
+    name: 'eve',
+    height: 1.6,
+    types: ['speed']
+});
+console.log(pokemonRepository.getAll());
+pokemonRepository.getAll().forEach(function (pokemon) {
+    let size;
+    if (pokemon.height > 5) {
+        size = "Big Pokemon";
+    } else if (pokemon.height <= 6 && pokemon.height > 2) {
+        size = "Medium Size";
+    } else {
+        size = "Small Pokemon";
+    }
+    let color;
+    if (pokemon.types.includes('grass')) {
+        color = '<span style="color: green;">'
+    } else if (pokemon.types.includes('fire')) {
+        color = '<span style="color: red;">'
+    } else if (pokemon.types.includes('water')) {
+        color = '<span style="color: blue;">'
+    } else if (pokemon.types.includes('speed')) {
+        color = '<span style="color: lightblue;">'
+    } else if (pokemon.types.includes('psychic')) {
+        color = '<span style="color: yellow;">'
+    }
+    document.write(
+        '<div class="box">' +
+        pokemon.name +
+        " (height: " +
+        pokemon.height +
+        ")" +
+        "<br>" +
+        size +
+        "<br>" +
+        color +
+        pokemon.types +
+        "<br>" +
+        "</div>"
+    );
 });
