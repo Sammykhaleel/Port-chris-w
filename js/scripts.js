@@ -108,14 +108,14 @@ let pokemonRepository = (function () {
         let modalContainer = document.querySelector("#modal-container");
         modalContainer.classList.remove("is-visible");
     }
-    // This is for the Esc key
-    // window.addEventListener('keydown', (e) => {
-    //     let modalContainer = document.querySelector("#modal-container");
-    //     if (e.key === 'Escape' && modalContainer.classList.contains("is-visible")) {
-    //         hideModal();
-    //     }
-    // });
-
+    //This is for the Esc key
+    window.addEventListener('keydown', (e) => {
+        let modalContainer = document.querySelector("#modal-container");
+        if (e.key === 'Escape' && modalContainer.classList.contains("is-visible")) {
+            hideModal();
+        }
+    });
+    let modalContainer = document.querySelector("#modal-container")
     modalContainer.addEventListener('click', (e) => {
         // Since this is also triggered when clicking INSIDE the modal
         let target = e.target;
@@ -124,9 +124,9 @@ let pokemonRepository = (function () {
         }
     });
 
-    // document.querySelector("#modal-container").addEventListener('click', () => {
-    //     showModal();
-    // })
+    document.querySelector("#modal-container").addEventListener('click', () => {
+        showModal();
+    })
 
 
 
