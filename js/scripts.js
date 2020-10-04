@@ -21,8 +21,12 @@ let pokemonRepository = (function () {
             showDetails(pokemon);
         });
     }
-    function showDetails(pokemon) {
-        console.log(pokemon);
+
+    function showDetails(item) {
+        loadDetails(item).then(function () {
+            console.log(item);
+            showModal(item)
+        });
     }
     // This loads the Pokemon URL 
     function loadList() {
@@ -48,23 +52,92 @@ let pokemonRepository = (function () {
             // This adds details from the URL
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
-            item.types = details.types;
+            //item.types = details.types;
+            item.types = [];
+            details.types.forEach(function (typeItem) {
+                item.types.push(typeItem.type.name)
+            });
+            item.abilities = [];
+            details.abilities.forEach(function (abilityItem) {
+                item.abilities.push(abilityItem.ability.name)
+            })
+
         }).catch(function (e) {
             console.error(e);
         });
     }
-    function showDetails(pokemon) {
-        loadDetails(pokemon).then(function () {
-            console.log(pokemon);
-        });
+
+    function showModal(item) {
+        let modalContainer = document.querySelector("#modal-container");
+
+        // Clears existing modal content
+        modalContainer.innerHTML = '';
+
+        let modal = document.createElement("div");
+        modal.classList.add("modal");
+
+        //Close button for the modal
+        let closeButtonElement = document.createElement('button');
+
+        closeButtonElement.classList.add("modal-close");
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        let nameElement = document.createElement("h1");
+        nameElement.innerText = item.name;
+
+        // adds the image content
+        let imageElement = document.createElement("img");
+        imageElement.classList.add("modal-image");
+        imageElement.setAttribute("src", item.imageUrl);
+
+        //adds the height content
+        heightElement = document.createElement("p");
+        heightElement.innerText = 'Height : ' + item.height;
+
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(nameElement);
+        modal.appendChild(imageElement);
+        modal.appendChild(heightElement);
+        modalContainer.appendChild(modal);
+        // Adds the visible class
+        modalContainer.classList.add("is-visible");
     }
+
+    function hideModal() {
+        let modalContainer = document.querySelector("#modal-container");
+        modalContainer.classList.remove("is-visible");
+    }
+    // This is for the Esc key
+    // window.addEventListener('keydown', (e) => {
+    //     let modalContainer = document.querySelector("#modal-container");
+    //     if (e.key === 'Escape' && modalContainer.classList.contains("is-visible")) {
+    //         hideModal();
+    //     }
+    // });
+
+    modalContainer.addEventListener('click', (e) => {
+        // Since this is also triggered when clicking INSIDE the modal
+        let target = e.target;
+        if (target === modalContainer) {
+            hideModal();
+        }
+    });
+
+    // document.querySelector("#modal-container").addEventListener('click', () => {
+    //     showModal();
+    // })
+
+
 
     return {
         add: add,
         getAll: getAll,
         addListItem: addListItem,
         loadList: loadList,
-        loadDetails: loadDetails
+        loadDetails: loadDetails,
+        showModal: showModal,
+        hideModal: hideModal
     };
 })();
 
