@@ -115,7 +115,7 @@ let pokemonRepository = (function () {
             hideModal();
         }
     });
-    let modalContainer = document.querySelector("#modal-container")
+    let modalContainer = document.querySelector("#modal-container");
     modalContainer.addEventListener('click', (e) => {
         // Since this is also triggered when clicking INSIDE the modal
         let target = e.target;
