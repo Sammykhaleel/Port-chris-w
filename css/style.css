@@ -12,6 +12,7 @@
 
 .pokemon-list {
   list-style: none;
+  text-align: center;
 }
 
 #modal-container {
