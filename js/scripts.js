@@ -60,7 +60,7 @@ let pokemonRepository = (function () {
             item.abilities = [];
             details.abilities.forEach(function (abilityItem) {
                 item.abilities.push(abilityItem.ability.name)
-            })
+            });
 
         }).catch(function (e) {
             console.error(e);
