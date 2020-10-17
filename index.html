@@ -15,22 +15,33 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Pokedex</span>
+      <nav class="navbar navbar-light">
+        <h1 class="poke-text">Pokedex</h1>
       </nav>
     </header>
-    <ul class="pokemon-list"></ul>
+    <input
+      type="text"
+      id="myInput"
+      onkeyup="search()"
+      placeholder="Search for names.."
+      title="Type in a name"
+    />
+    <!-- <ul class="pokemon-list"></ul> -->
+    <div
+      id="myUL"
+      class="pokemon-list row d-flex justify-content-center flex-wrap"
+    ></div>
 
     <div
       class="modal fade"
-      id="modal-container"
+      id="exampleModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="background-color: #eae6dd">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel"></h5>
             <button
@@ -46,7 +57,8 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn"
+              style="background-color: #8b6d6c; color: #eae6dd"
               data-dismiss="modal"
             >
               Close
