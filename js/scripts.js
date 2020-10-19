@@ -9,18 +9,7 @@ let pokemonRepository = (function () {
     function getAll() {
         return pokemonList;
     }
-    // function addListItem(pokemon) {
-    //     let pokeDex = document.querySelector('.pokemon-list');
-    //     let listItem = document.createElement('li');
-    //     let button = document.createElement('button');
-    //     button.innerText = pokemon.name;
-    //     button.classList.add('poke-button');
-    //     listItem.appendChild(button);
-    //     pokeDex.appendChild(listItem);
-    //     button.addEventListener('click', function (event) {
-    //         showDetails(pokemon);
-    //     });
-    // }
+
     function addListItem(pokemon) {
         pokemonRepository.loadDetails(pokemon).then(function () {
             let row = $(".row");
@@ -33,7 +22,7 @@ let pokemonRepository = (function () {
             image.attr("src", pokemon.imageUrl);
             let body = $('<div class="card-body" style="text-align: center;"></div>');
             let button = $(
-                '<button type="button" class="btn" style="background-color: #d88780; color: white" data-toggle="modal" data-target="#exampleModal">See profile</button>'
+                '<button type="button" class="btn" style="background-color: #3b4cca; color: white" data-toggle="modal" data-target="#exampleModal">See profile</button>'
             );
 
             //append
@@ -171,7 +160,6 @@ let pokemonRepository = (function () {
         loadList: loadList,
         loadDetails: loadDetails,
         showModal: showModal,
-        // hideModal: hideModal
     };
 })();
 
